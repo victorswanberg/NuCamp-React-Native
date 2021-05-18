@@ -14,17 +14,17 @@ class Directory extends Component {
 
     static navigationOptions = {
         title: 'Directory'
-    };
+    }
 
     render() {
         const { navigate } = this.props.navigation;
-        const renderDirectoryItem = ({item}) => {
+        const renderDirectoryItem = ({ item }) => {
             return (
                 <ListItem
                     title={item.name}
                     subtitle={item.description}
                     onPress={() => navigate('CampsiteInfo', { campsiteId: item.id })}
-                    leftAvatar={{ source: require('./images/react-lake.jpg')}}
+                    leftAvatar={{ source: require('../shared/images/react-lake.jpg') }}
                 />
             );
         };
