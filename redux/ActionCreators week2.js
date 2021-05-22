@@ -26,7 +26,7 @@ export const commentsFailed = errMess => ({
     payload: errMess
 });
 
-export const addComments = comments => ({
+export const addComments = (comments) => ({
     type: ActionTypes.ADD_COMMENTS,
     payload: comments
 });
@@ -38,11 +38,11 @@ export const fetchCampsites = () => dispatch => {
     return fetch(baseUrl + 'campsites')
         .then(response => {
                 if (response.ok) {
-                    return response;
+                return response;
                 } else {
                     const error = new Error(`Error ${response.status}: ${response.statusText}`);
                     error.response = response;
-                    throw error;
+                throw error;
                 }
             },
             error => {
@@ -152,3 +152,22 @@ export const addFavorite = campsiteId => ({
     type: ActionTypes.ADD_FAVORITE,
     payload: campsiteId
 });
+
+export const postComment = (campsiteId, rating, author, text) => dispatch => {
+    const newComment = {
+        campsiteId,
+        rating, 
+        author,
+        text,
+    };
+    newComment.date = new Date().toISOString();
+
+    setTimeout(() => {
+        dispatch(addComment(newComment));
+        }, 2000);
+};
+
+export const addComment = comment => ({
+    type: ActionTypes.ADD_COMMENT,
+    payload: comment
+})
