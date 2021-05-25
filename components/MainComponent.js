@@ -14,6 +14,9 @@ import { Icon } from 'react-native-elements';
 import SafeAreaView from 'react-native-safe-area-view';
 import { connect } from 'react-redux';
 import { fetchCampsites, fetchComments, fetchPromotions, fetchPartners } from '../redux/ActionCreators';
+import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
+// import { Constants } from 'expo';
+import Constants from 'expo-constants';
 
 const mapDispatchToProps = {
     fetchCampsites,
@@ -290,12 +293,14 @@ class Main extends Component {
         this.props.fetchComments();
         this.props.fetchPromotions();
         this.props.fetchPartners();
+        console.log(Constants);
     }
 
     render() {
         return (
             <View style={{
-                flex: 1
+                flex: 1,
+                paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
             }}>
                 <AppNavigator />
             </View>
@@ -326,7 +331,7 @@ const styles = StyleSheet.create({
         width: 60
     },
     stackIcon: {
-        marginLeft: 10,
+        marginLeft: 20,
         color: '#fff',
         fontSize: 24
     }
